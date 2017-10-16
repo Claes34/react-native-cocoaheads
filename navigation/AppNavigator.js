@@ -1,25 +1,25 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { EventListScreen } from '../screens'
+import { FilmListScreen } from '../screens'
 import Theme from '../Theme'
 
 const Route = {
-  EventList: 'EventList'
+  FilmList: 'FilmList'
 }
 
 const AppNavigator = StackNavigator(
   // @see https://reactnavigation.org/docs/navigators/stack#RouteConfigs
   {
-    [Route.EventList]: {
-      screen: EventListScreen,
+    [Route.FilmList]: {
+      screen: FilmListScreen,
       navigationOptions: {
-        title:'Évènements'
+        title:'Studio Ghibli'
       }
     },
   },
   // @see https://reactnavigation.org/docs/navigators/stack#StackNavigatorConfig
   {
-    initialRouteName: Route.EventList,
+    initialRouteName: Route.FilmList,
     navigationOptions: {
       headerStyle : {
         backgroundColor : Theme.Colors.mainColor,

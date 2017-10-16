@@ -1,5 +1,5 @@
-import EventListScreen from './EventListScreen';
+import FilmListScreen from './FilmListScreen';
 
 export {
-  EventListScreen
+  FilmListScreen
 }

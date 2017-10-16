@@ -1,5 +1,7 @@
-import EventListItem from './EventListItem';
+import FilmListItem from './FilmListItem';
+import FilmCollectionItem from './FilmCollectionItem'
 
 export {
-  EventListItem
+  FilmListItem,
+  FilmCollectionItem
 }

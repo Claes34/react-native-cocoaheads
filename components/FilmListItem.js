@@ -5,24 +5,26 @@ import moment from 'moment'
 import Theme from '../Theme';
 import Images from '../assets/Images';
 
-const EventListItem = (props) => {
-  let eventDate = moment(props.event.date).format('DD MMM YYYY');
-  let eventTime = moment(props.event.date).format('hh : mm');
+const FilmListItem = (props) => {
   return (
-    <TouchableOpacity style={styles.container}>
-      <Image source={Images.facebookIcon} style={styles.facebookIcon}/>
-      <Text style={styles.eventName}>{props.event.name}</Text>
-      <View style={styles.dateTime}>
-        <Text style={styles.date}>{eventDate}</Text>
-        <Text style={styles.time}>{eventTime}</Text>
+    <TouchableOpacity style={[styles.container, props.style]}>
+      <Image source={Images.totoroIcon} style={styles.totoroIcon}/>
+      <View style={styles.titleContainer}>
+        <Text style={styles.movieName}>{props.movie.title}</Text>
+        <Text style={styles.year}>{props.movie.release_date}</Text>
+      </View>
+      <View style={styles.score}>
+        <Text style={styles.currentScore}>{props.movie.rt_score}</Text>
+        <Text style={styles.scoreMax}> /100</Text>
       </View>
       <View style={styles.separator} />
     </TouchableOpacity>
   )
 };
 
-EventListItem.propTypes = {
-  event: PropTypes.object
+FilmListItem.propTypes = {
+  movie: PropTypes.object,
+  style: PropTypes.any
 };
 
 const styles = StyleSheet.create({
@@ -34,41 +36,47 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Theme.Colors.cellBackground,
     paddingHorizontal: Theme.defaultScreenPadding,
-    paddingVertical: 15
+    paddingVertical: 15,
   },
-  eventName: {
-    flex:1,
+  movieName: {
     marginRight: 15,
-    fontSize: 12,
-
+    fontSize: 14,
   },
   separator: {
     height: 1.5,
     position: 'absolute',
     bottom: 0,
-    left: 1,
-    width: '100%',
+    left: 56,
+    right:0,
     backgroundColor: Theme.Colors.separatorColor
   },
-  dateTime: {
+  titleContainer: {
+    flex:1,
     flexDirection: 'column',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'flex-start'
   },
-  date: {
-    fontSize: 12,
+  score: {
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
+  currentScore: {
+    fontSize: 20,
     fontWeight: 'bold',
   },
-  time: {
+  scoreMax: {
+    fontSize: 11,
+  },
+  year: {
     fontSize: 12,
     fontWeight: '200'
   },
-  facebookIcon: {
+  totoroIcon: {
     height: 40,
     width: 40,
     resizeMode: 'contain',
-    marginRight: 15,
+    marginRight: Theme.defaultScreenPadding,
   }
 });
 
-export default EventListItem;
+export default FilmListItem;
