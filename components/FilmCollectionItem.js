@@ -4,20 +4,28 @@ import PropTypes from 'prop-types';
 import moment from 'moment'
 import Theme from '../Theme';
 import Images from '../assets/Images';
+import { Movie } from '../models/movie';
 
-const FilmListItem = (props) => {
+export default FilmListItem = props => {
+  const movie: Movie = props.movie;
   return (
     <TouchableOpacity style={[styles.container, props.style]}>
       <Image
-        source={Images['movie'+props.movie.id]}
+        source={Images['movie'+movie.id]}
         style={styles.movieBackground}/>
       <View style={styles.content}>
         <View style={styles.titleContainer}>
-          <Text style={styles.movieName}>{props.movie.title}</Text>
+          <Text style={styles.movieName}>
+            {movie.title}
+          </Text>
         </View>
         <View style={styles.score}>
-          <Text style={styles.year}>{props.movie.release_date}</Text>
-          <Text style={styles.currentScore}>{props.movie.rt_score + ' / 100'}</Text>
+          <Text style={styles.year}>
+            {movie.releaseDate}
+          </Text>
+          <Text style={styles.currentScore}>
+            {movie.rtScore + ' / 100'}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -80,5 +88,3 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   }
 });
-
-export default FilmListItem;
