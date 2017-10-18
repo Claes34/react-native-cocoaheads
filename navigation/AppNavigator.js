@@ -1,10 +1,11 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { FilmListScreen } from '../screens'
+import { FilmListScreen, FilmDetailsScreen } from '../screens'
 import Theme from '../Theme'
 
 const Route = {
-  FilmList: 'FilmList'
+  FilmList: 'FilmList',
+  FilmDetails: 'FilmDetails'
 }
 
 const AppNavigator = StackNavigator(
@@ -14,6 +15,12 @@ const AppNavigator = StackNavigator(
       screen: FilmListScreen,
       navigationOptions: {
         title:'Studio Ghibli'
+      }
+    },
+    [Route.FilmDetails]: {
+      screen: FilmDetailsScreen,
+      navigationOptions: {
+        title:'Détails'
       }
     },
   },

@@ -15,6 +15,7 @@ const Theme = {
     textOnImageBackground: 'rgba(75,142, 155,0.5)',
     cellBackground: colors.white,
     separatorColor: colors.grey,
+    loaderBackground: colors.white
   },
   defaultScreenPadding : 8,
 };

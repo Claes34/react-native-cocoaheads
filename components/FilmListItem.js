@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import moment from 'moment'
 import Theme from '../Theme';
 import Images from '../assets/Images';
-import { Movie } from '../models/movie';
+import { Movie } from '../models/Movie';
 
 export default FilmListItem = props => {
   const movie: Movie = props.movie.item;
   return (
-    <TouchableOpacity style={[styles.container, props.style]}>
+    <TouchableOpacity onPress={props.onPress} style={[styles.container, props.style]}>
       <Image source={Images.totoroIcon} style={styles.totoroIcon}/>
       <View style={styles.titleContainer}>
         <Text style={styles.movieName}>
@@ -32,7 +32,8 @@ export default FilmListItem = props => {
 
 FilmListItem.propTypes = {
   movie: PropTypes.object,
-  style: PropTypes.any
+  style: PropTypes.any,
+  onPress: PropTypes.func
 };
 
 const styles = StyleSheet.create({
