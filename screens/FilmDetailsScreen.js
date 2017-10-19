@@ -8,7 +8,7 @@ export default class FilmDetailsScreen extends Component {
   constructor(props){
     super(props);
 
-    this.state ={
+    this.state = {
       movie: props.navigation.state.params.movie
     };
   }
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   separator: {
     marginVertical: 10,
     height: 1,
-    width: '70%',
+    width: 150,
     backgroundColor: Theme.Colors.mainColor
   }
 });
