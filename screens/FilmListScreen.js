@@ -41,10 +41,12 @@ export default class FilmListScreen extends Component {
     const featuredMovies = movies.slice(0, 3);
     const otherMovies = movies.slice(3, movies.length - 1);
 
-    this.setState({
-      featuredMovies: featuredMovies,
-      otherMovies: otherMovies
-    });
+    setTimeout(() => {
+      this.setState({
+        featuredMovies: featuredMovies,
+        otherMovies: otherMovies
+      });
+    }, 1000)
   }
 
   _listHeader() {
@@ -62,7 +64,7 @@ export default class FilmListScreen extends Component {
   }
 
   _goToDetails(movie) {
-    this.props.navigation.navigate('FilmDetails');
+    this.props.navigation.navigate('FilmDetails', {movie: movie});
   }
 
   render() {
@@ -80,7 +82,7 @@ export default class FilmListScreen extends Component {
             data={this.state.otherMovies}
             keyExtractor={(item, index) => item.id}
             ListHeaderComponent={() => this._listHeader()}
-            renderItem={item => <FilmListItem onPress={() => this._goToDetails(item)} movie={item} style={styles.listItem} />}
+            renderItem={movie => <FilmListItem onPress={() => this._goToDetails(movie.item)} movie={movie} style={styles.listItem} />}
           />
       )
     }
