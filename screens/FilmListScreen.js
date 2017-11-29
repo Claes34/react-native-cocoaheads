@@ -1,58 +1,30 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import GridView from 'react-native-grid-view';
+import { connect } from 'react-redux';
 import { FilmListItem, FilmCollectionItem } from '../components';
 import Theme from '../Theme';
-import mocks from '../mocks.json';
-import { Ghibli } from '../services/ghibli.service';
 import { Movie } from '../models/Movie';
 import Images from '../assets/Images';
+import { fetchMovies } from '../state/actions/servicesActionCreator';
 
-const IS_MOCK = false;
-
-export default class FilmListScreen extends Component {
+class FilmListScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.service = new Ghibli();
-    this.state = {
-      otherMovies: [],
-      featuredMovies: []
-    };
   }
+
+  // componentDidReceiveProps(props){}
 
   componentDidMount() {
-    if (IS_MOCK) {
-        const data = mocks.map(m => new Movie(m));
-        this.setMovies(data);
-    } else {
-      this.service
-        .fetchMovies()
-        .then(movies => this.setMovies(movies))
-        .catch(console.error);
-    }
+    this.props.dispatch(fetchMovies());
   }
 
-  setMovies(movies: Movie[]) {
-    // Sorting movies by decreasing release date
-    movies.sort((a, b) => b.releaseDate - a.releaseDate)
+  _listHeader(featuredMovies) {
 
-    // Slicing the movies array to split the top featured and the others
-    const featuredMovies = movies.slice(0, 3);
-    const otherMovies = movies.slice(3, movies.length - 1);
-
-    setTimeout(() => {
-      this.setState({
-        featuredMovies: featuredMovies,
-        otherMovies: otherMovies
-      });
-    }, 1000)
-  }
-
-  _listHeader() {
     return (
       <GridView
-        items={this.state.featuredMovies}
+        items={featuredMovies}
         itemsPerRow={2}
         renderItem={item => <FilmCollectionItem key={item.id} onPress={() => this._goToDetails(item)} movie={item} style={styles.gridItem}/>}
         enableEmptySections
@@ -68,24 +40,20 @@ export default class FilmListScreen extends Component {
   }
 
   render() {
-    if (this.state.featuredMovies.length === 0){
-      return (
-        <View style={styles.loaderContainer}>
-          <Image style={styles.loader} source={Images.loadingTotoro}/>
-          <Text style={styles.loaderText}>Loading...</Text>
-        </View>
-      )
-    } else {
-      return (
-          <FlatList
-            contentContainerStyle={styles.container}
-            data={this.state.otherMovies}
-            keyExtractor={(item, index) => item.id}
-            ListHeaderComponent={() => this._listHeader()}
-            renderItem={movie => <FilmListItem onPress={() => this._goToDetails(movie.item)} movie={movie} style={styles.listItem} />}
-          />
-      )
-    }
+    const { movies } = this.props.content;
+    movies.sort((a, b) => b.releaseDate - a.releaseDate)
+    const featuredMovies = movies.slice(0, 3);
+    const otherMovies = movies.slice(3, movies.length - 1);
+
+    return (
+      <FlatList
+        contentContainerStyle={styles.container}
+        data={otherMovies}
+        keyExtractor={(item, index) => item.id}
+        ListHeaderComponent={() => this._listHeader(featuredMovies)}
+        renderItem={movie => <FilmListItem onPress={() => this._goToDetails(movie.item)} movie={movie} style={styles.listItem} />}
+      />
+    )
   }
 }
 
@@ -125,3 +93,11 @@ const styles = StyleSheet.create({
   }
 
 });
+
+const mapStateToProps = state => {
+  return {
+    content: state.content,
+  }
+};
+
+export default connect(mapStateToProps)(FilmListScreen);

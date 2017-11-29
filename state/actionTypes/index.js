@@ -1,0 +1,19 @@
+const ActionTypes = {
+  loader: {
+    SHOW: 'SHOW_LOADER',
+    HIDE: 'HIDE_LOADER'
+  },
+  moviesList: {
+    FETCH_REQUEST : 'FETCH_FILM_LIST_REQUEST',
+    FETCH_FAILURE : 'FETCH_FILM_LIST_FAILURE',
+    FETCH_SUCCESS : 'FETCH_FILM_LIST_SUCCESS'
+  },
+  filmDetails: {
+    FETCH_REQUEST : 'FETCH_FILM_DETAILS_REQUEST',
+    FETCH_FAILURE : 'FETCH_FILM_DETAILS_FAILURE',
+    FETCH_SUCCESS : 'FETCH_FILM_DETAILS_SUCCESS'
+  }
+
+}
+
+export default ActionTypes;
