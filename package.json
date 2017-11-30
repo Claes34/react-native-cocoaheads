@@ -19,15 +19,22 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "apollo-cache-inmemory": "^1.1.1",
+    "apollo-client": "^2.0.3",
+    "apollo-link-http": "^1.2.0",
     "assign-deep": "^0.4.6",
     "expo": "^21.0.0",
+    "graphql": "^0.11.7",
+    "graphql-tag": "^2.5.0",
     "moment": "^2.19.1",
     "react": "16.0.0-alpha.12",
+    "react-apollo": "^2.0.1",
     "react-native": "0.48.4",
     "react-native-grid-view": "https://github.com/renancaraujo/react-native-grid-view#5fa4d6121ed346a34c5bbd346d1af3fd8e193d30",
     "react-navigation": "^1.0.0-beta.13",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "subscriptions-transport-ws": "^0.9.1"
   }
 }

@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, StyleSheet, Image } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Image, FlatList } from 'react-native';
 import Theme from '../Theme';
 import Images from '../assets/Images';
+import { connect } from 'react-redux';
+import { fetchDetailedMovie } from '../state/actions/servicesActionCreator';
 
-export default class FilmDetailsScreen extends Component {
+class FilmDetailsScreen extends Component {
 
   constructor(props){
     super(props);
 
     this.state = {
-      movie: props.navigation.state.params.movie
+      movieId: props.navigation.state.params.movieId
     };
   }
 
+  componentDidMount() {
+    this.props.dispatch(fetchDetailedMovie(this.state.movieId));
+  }
+
   render() {
-    const movie = this.state.movie;
+    const movie = this.props.content.detailedMovie;
+
+    console.log(movie);
+
     return(
       <ScrollView
         style={styles.container}
@@ -43,6 +52,14 @@ export default class FilmDetailsScreen extends Component {
             <Text style={styles.smallInfos}>
               Note : {movie.rtScore} / 100
             </Text>
+            {(movie.peoples != null) && movie.peoples.length > 0 &&
+              <Text style={styles.peopleTitleLabel}>Personnages : </Text>
+            }
+            {movie.peoples.map((person, index) =>{
+              return(
+                <Text key={index}>{person.name} - {person.specie.name}</Text>
+              )
+            })}
           </View>
         </View>
 
@@ -106,5 +123,17 @@ const styles = StyleSheet.create({
     height: 1,
     width: 150,
     backgroundColor: Theme.Colors.mainColor
+  },
+  peopleTitleLabel : {
+    fontSize: 17,
+    marginVertical: 10
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    content: state.content,
+  }
+};
+
+export default connect(mapStateToProps)(FilmDetailsScreen);

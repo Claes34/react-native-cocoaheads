@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar, Platform } from 'react-native';
 import {applyMiddleware, createStore} from 'redux';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import loaderMiddleware from './state/middlewares/loaderMiddleware';
@@ -9,6 +9,7 @@ import logger from './state/middlewares/logger';
 import AppNavigator from './navigation/AppNavigator';
 import AppReducer from './state/reducers';
 import Theme from './Theme';
+import client from './client';
 
 
 

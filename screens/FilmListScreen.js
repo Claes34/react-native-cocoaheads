@@ -36,7 +36,7 @@ class FilmListScreen extends Component {
   }
 
   _goToDetails(movie) {
-    this.props.navigation.navigate('FilmDetails', {movie: movie});
+    this.props.navigation.navigate('FilmDetails', {movieId: movie.id});
   }
 
   render() {
@@ -58,22 +58,6 @@ class FilmListScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  loaderContainer:{
-    flex:1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Theme.Colors.loaderBackground,
-  },
-  loaderText: {
-    fontSize: 18,
-    fontWeight: '200'
-  },
-  loader:{
-    height: 200,
-    width: 200,
-    resizeMode: 'contain'
-  },
   container: {
     paddingTop: Theme.defaultScreenPadding,
     paddingLeft: Theme.defaultScreenPadding,

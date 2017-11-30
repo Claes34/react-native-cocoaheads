@@ -6,11 +6,12 @@ export class Movie {
   producer: string;
   releaseDate: string;
   rtScore: string;
-  people: string[];
+  peoples: any[];
   species: string[];
   locations: string[];
   vehicles: string[];
   url: string;
+  pictureUrl: string;
 
   constructor(json) {
     this.id = json.id;
@@ -20,10 +21,11 @@ export class Movie {
     this.producer = json.producer;
     this.releaseDate = json.release_date;
     this.rtScore = json.rt_score;
-    this.people = json.people;
     this.species = json.species;
     this.locations = json.locations;
     this.vehicles = json.vehicles;
     this.url = json.url;
+    this.pictureUrl = json.picture_url;
+    this.peoples = json.peoples;
   }
 }

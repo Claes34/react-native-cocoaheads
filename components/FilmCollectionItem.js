@@ -10,9 +10,9 @@ export default FilmListItem = props => {
   const movie: Movie = props.movie;
   return (
     <TouchableOpacity onPress={props.onPress} style={[styles.container, props.style]}>
-      <Image
-        source={Images['movie'+movie.id]}
-        style={styles.movieBackground}/>
+      { (movie.pictureUrl != null && movie.pictureUrl.length > 0) && <Image
+        source={{uri: movie.pictureUrl}}
+        style={styles.movieBackground}/>}
       <View style={styles.content}>
         <View style={styles.titleContainer}>
           <Text style={styles.movieName}>
