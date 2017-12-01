@@ -7,6 +7,8 @@ import Theme from '../Theme';
 import { Movie } from '../models/Movie';
 import Images from '../assets/Images';
 import { fetchMovies } from '../state/actions/servicesActionCreator';
+import PropTypes from 'prop-types';
+
 
 class FilmListScreen extends Component {
 
@@ -56,6 +58,12 @@ class FilmListScreen extends Component {
     )
   }
 }
+
+FilmListScreen.propTypes = {
+  dispatch: PropTypes.func,
+  content: PropTypes.object
+}
+
 
 const styles = StyleSheet.create({
   container: {

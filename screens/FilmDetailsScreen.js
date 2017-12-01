@@ -4,6 +4,8 @@ import Theme from '../Theme';
 import Images from '../assets/Images';
 import { connect } from 'react-redux';
 import { fetchDetailedMovie } from '../state/actions/servicesActionCreator';
+import ActionTypes from '../state/actionTypes';
+import PropTypes from 'prop-types';
 
 class FilmDetailsScreen extends Component {
 
@@ -19,10 +21,15 @@ class FilmDetailsScreen extends Component {
     this.props.dispatch(fetchDetailedMovie(this.state.movieId));
   }
 
+  componentWillUnmount() {
+    this.props.dispatch({type:ActionTypes.filmDetails.CLEAN});
+  }
+
   render() {
     const movie = this.props.content.detailedMovie;
 
     console.log(movie);
+    let hasPictureUrl = (movie.pictureUrl && movie.pictureUrl.length > 0);
 
     return(
       <ScrollView
@@ -30,7 +37,7 @@ class FilmDetailsScreen extends Component {
         contentContainerStyle={styles.contentContainerStyle}>
 
         <View style={styles.topContent}>
-          <Image style={styles.headerImage} source={Images.fakeDetails}>
+          <Image style={styles.headerImage} source={hasPictureUrl ? {uri: movie.pictureUrl} : null}>
             <Text style={styles.title}>
               {movie.title}
             </Text>
@@ -41,19 +48,19 @@ class FilmDetailsScreen extends Component {
             </Text>
             <View style={styles.separator}/>
             <Text style={styles.smallInfos}>
-              Date de sortie : {movie.releaseDate}
+              Release date : {movie.releaseDate}
             </Text>
             <Text style={styles.smallInfos}>
-              Producteur : {movie.producer}
+              Producer : {movie.producer}
             </Text>
             <Text style={styles.smallInfos}>
-              Directeur : {movie.director}
+              Director : {movie.director}
             </Text>
             <Text style={styles.smallInfos}>
-              Note : {movie.rtScore} / 100
+              Score : {movie.rtScore} / 100
             </Text>
             {(movie.peoples != null) && movie.peoples.length > 0 &&
-              <Text style={styles.peopleTitleLabel}>Personnages : </Text>
+              <Text style={styles.peopleTitleLabel}>Characters : </Text>
             }
             {movie.peoples.map((person, index) =>{
               return(
@@ -67,6 +74,11 @@ class FilmDetailsScreen extends Component {
       </ScrollView>
     )
   }
+}
+
+FilmDetailsScreen.propTypes = {
+  dispatch: PropTypes.func,
+  content: PropTypes.object
 }
 
 const styles = StyleSheet.create({

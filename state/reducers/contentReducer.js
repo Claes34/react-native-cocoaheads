@@ -16,7 +16,7 @@ const emptyMovie = {
   peoples: []
 }
 
-const initialState = { movies: [], detailedMovie: emptyMovie};
+const initialState = { movies: [], detailedMovie: {...emptyMovie}};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -40,6 +40,8 @@ export default (state = initialState, action) => {
               { text: 'OK', onPress: () => {}}
             ]);
       return state;
+    case ActionTypes.filmDetails.CLEAN:
+      return { ...state, detailedMovie: {...emptyMovie}}
     default:
       return state;
   }
