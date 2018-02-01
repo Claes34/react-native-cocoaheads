@@ -4,7 +4,7 @@ A sample application written in react-native for Montpellier's Cocoahead (octobe
 ## Requirement
 * nodejs & npm
 * [Expo XDE]('https://expo.io')
-* X Code ou un device Android
+* Xcode ou un device Android
 
 ## Installation
 * `npm install`
